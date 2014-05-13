@@ -1,5 +1,9 @@
 package br.ufg.inf.fs.android.a01;
 
+import java.util.List;
+
+import br.ufg.inf.fs.android.persist.Usuario;
+import br.ufg.inf.fs.android.persist.UsuarioDAO;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,6 +31,36 @@ public class MyActivity extends Activity {
         // layout e, neste diretório, o arquivo main.xml. Tudo isto
         // é "deduzível" de R.lyout.main.
         setContentView(R.layout.main);
+        
+        testCRUD();
+    }
+    
+    public void testCRUD() {
+        
+        Usuario usuario = new Usuario(0, "Diogo", "djapiassu", "1010");
+        UsuarioDAO usuarioDAO =  UsuarioDAO.getInstance(getBaseContext());
+         
+        usuarioDAO.salvar(usuario);
+         
+        List<Usuario> usuariosNaBase = usuarioDAO.recuperarTodos();
+        //assertFalse(usuariosNaBase.isEmpty());
+         
+        Usuario usuarioRecuperado = usuariosNaBase.get(0);
+        usuarioRecuperado.setNome("Diogo Japiassu");
+         
+        usuarioDAO.editar(usuarioRecuperado);
+         
+        Usuario usuarioEditado = usuarioDAO.recuperarTodos().get(0);
+         
+        //assertSame(usuarioRecuperado.getId(), usuarioEditado.getId());
+        //assertNotSame(usuario.getNome(), usuarioEditado.getNome());
+         
+        usuarioDAO.deletar(usuarioEditado);
+         
+        //assertTrue(usuarioDAO.recuperarTodos().isEmpty());
+         
+        usuarioDAO.fecharConexao();
+         
     }
 
     /**

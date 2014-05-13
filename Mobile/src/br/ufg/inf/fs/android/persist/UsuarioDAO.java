@@ -39,6 +39,7 @@ public class UsuarioDAO {
     private UsuarioDAO(Context context) {
         PersistenceHelper persistenceHelper = PersistenceHelper.getInstance(context);
         dataBase = persistenceHelper.getWritableDatabase();
+        persistenceHelper.onCreate(dataBase);
     }
  
     public void salvar(Usuario usuario) {

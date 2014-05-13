@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class PersistenceHelper extends SQLiteOpenHelper {
  
-    public static final String NOME_BANCO =  "ExemploVeiculo";
+    public static final String NOME_BANCO =  "NotificaUniversidade";
     public static final int VERSAO =  1;
      
     private static PersistenceHelper instance;
@@ -24,12 +24,12 @@ public class PersistenceHelper extends SQLiteOpenHelper {
  
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //db.execSQL(VeiculoDAO.SCRIPT_CRIACAO_TABELA_VEICULOS);
+        db.execSQL(UsuarioDAO.SCRIPT_CRIACAO_TABELA_USUARIOS);
     }
  
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //db.execSQL(VeiculoDAO.SCRIPT_DELECAO_TABELA);
+        db.execSQL(UsuarioDAO.SCRIPT_DELECAO_TABELA);
         onCreate(db);
     }
  
