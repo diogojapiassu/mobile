@@ -37,7 +37,8 @@ public class MyActivity extends Activity {
     
     public void testCRUD() {
         
-        Usuario usuario = new Usuario(0, "Diogo", "djapiassu", "1010");
+        //Salva usuário padrão para acesso ao sistema:
+    	Usuario usuario = new Usuario(0, "Diogo", "djapiassu", "1010");
         UsuarioDAO usuarioDAO =  UsuarioDAO.getInstance(getBaseContext());
          
         usuarioDAO.salvar(usuario);
@@ -62,6 +63,32 @@ public class MyActivity extends Activity {
         usuarioDAO.fecharConexao();
          
     }
+    
+	public void salvarConfiguracoes() {
+		// Salva usuário padrão para acesso ao sistema:
+		
+		boolean isExibirMensagensPersistencia = false;
+		boolean isExibirMensagensIntegracao = false;
+		boolean isExibirMensagensMobile = false;
+		boolean isExibirMensagensweb = false;
+		
+		Usuario usuario = new Usuario(0, "", "", "");
+		UsuarioDAO usuarioDAO = UsuarioDAO.getInstance(getBaseContext());
+
+		usuarioDAO.salvar(usuario);
+
+		List<Usuario> usuariosNaBase = usuarioDAO.recuperarTodos();
+		// assertFalse(usuariosNaBase.isEmpty());
+
+		Usuario usuarioRecuperado = usuariosNaBase.get(0);
+		usuarioRecuperado.setNome("Diogo Japiassu");
+
+		usuarioDAO.editar(usuarioRecuperado);
+
+		Usuario usuarioEditado = usuarioDAO.recuperarTodos().get(0);
+		usuarioDAO.deletar(usuarioEditado);
+		usuarioDAO.fecharConexao();
+	}
 
     /**
      * Chamado para "inflar" o recurso "menu" contendo
