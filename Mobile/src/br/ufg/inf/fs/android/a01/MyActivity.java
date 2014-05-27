@@ -1,19 +1,30 @@
 package br.ufg.inf.fs.android.a01;
 
 import java.util.List;
+import java.util.Random;
 
-import br.ufg.inf.fs.android.persist.Usuario;
-import br.ufg.inf.fs.android.persist.UsuarioDAO;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
+import br.ufg.inf.fs.android.persist.Usuario;
+import br.ufg.inf.fs.android.persist.UsuarioDAO;
 
 /**
  * Uma atividade herda de Activity.
  */
+@SuppressLint("NewApi")
 public class MyActivity extends Activity {
 
     /**
@@ -32,7 +43,10 @@ public class MyActivity extends Activity {
         // é "deduzível" de R.lyout.main.
         setContentView(R.layout.main);
         
-        testCRUD();
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.cancel(R.string.app_name);
+        
+        //testCRUD();
     }
     
     public void testCRUD() {
@@ -148,5 +162,47 @@ public class MyActivity extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    
+    //Teste notificação
+    /** Called when the user touches the button */
+    @SuppressLint("NewApi")
+	public void notificaTeste2(View view) {
+    	NotificationCompat.Builder mBuilder =
+    	        new NotificationCompat.Builder(this)
+    	        //.setSmallIcon(R.drawable.notification_icon)
+    	        .setContentTitle("My notification")
+    	        .setContentText("Hello World!");
+    	// Creates an explicit intent for an Activity in your app
+    	Intent resultIntent = new Intent(this, MyActivity.class);
+
+    	// The stack builder object will contain an artificial back stack for the
+    	// started Activity.
+    	// This ensures that navigating backward from the Activity leads out of
+    	// your application to the Home screen.
+    	TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+    	// Adds the back stack for the Intent (but not the Intent itself)
+    	stackBuilder.addParentStack(MyActivity.class);
+    	// Adds the Intent that starts the Activity to the top of the stack
+    	stackBuilder.addNextIntent(resultIntent);
+    	PendingIntent resultPendingIntent =
+    	        stackBuilder.getPendingIntent(
+    	            0,
+    	            PendingIntent.FLAG_UPDATE_CURRENT
+    	        );
+    	mBuilder.setContentIntent(resultPendingIntent);
+    	NotificationManager mNotificationManager =
+    	    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+    	// mId allows you to update the notification later on.
+    	mNotificationManager.notify(0, mBuilder.build());
+    }
+    
+    public void notificaTeste(View view) {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        Notification notification = new Notification(R.drawable.ic_launcher, "Nova notificação UFG!", System.currentTimeMillis());
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, MyActivity.class), 0);
+        notification.setLatestEventInfo(this, "Prova", "Mobile dia 24/05/2014", pendingIntent);
+        //int id = ;
+        notificationManager.notify(new Random().nextInt(), notification);
     }
 }
