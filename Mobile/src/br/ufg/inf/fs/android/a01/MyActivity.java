@@ -8,15 +8,19 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 import br.ufg.inf.fs.android.persist.Usuario;
 import br.ufg.inf.fs.android.persist.UsuarioDAO;
@@ -27,6 +31,8 @@ import br.ufg.inf.fs.android.persist.UsuarioDAO;
 @SuppressLint("NewApi")
 public class MyActivity extends Activity {
 
+	ListView listView ;
+	
     /**
      * Chamado quando a atividade é criada. Uma atividade
      * contém uma ContentView, que é inflada conforme o
@@ -43,13 +49,62 @@ public class MyActivity extends Activity {
         // é "deduzível" de R.lyout.main.
         setContentView(R.layout.main);
         
+        carregaLista();
+        
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.cancel(R.string.app_name);
         
         //testCRUD();
     }
     
-    public void testCRUD() {
+	private void carregaLista() {
+		// Get ListView object from xml
+		listView = (ListView) findViewById(R.id.listView1);
+
+		// Defined Array values to show in ListView
+		String[] values = new String[] { "Android List View",
+				"Adapter implementation", "Simple List View In Android",
+				"Create List View Android", "Android Example",
+				"List View Source Code", "List View Array Adapter",
+				"Android Example List View" };
+
+		// Define a new Adapter
+		// First parameter - Context
+		// Second parameter - Layout for the row
+		// Third parameter - ID of the TextView to which the data is written
+		// Forth - the Array of data
+
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, android.R.id.text1, values);
+
+		// Assign adapter to ListView
+		listView.setAdapter(adapter);
+
+		// ListView Item Click Listener
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+
+				// ListView Clicked item index
+				int itemPosition = position;
+
+				// ListView Clicked item value
+				String itemValue = (String) listView
+						.getItemAtPosition(position);
+
+				// Show Alert
+				Toast.makeText(
+						getApplicationContext(),
+						"Position :" + itemPosition + "  ListItem : "
+								+ itemValue, Toast.LENGTH_LONG).show();
+
+			}
+		});
+	}
+
+	public void testCRUD() {
         
         //Salva usuário padrão para acesso ao sistema:
     	Usuario usuario = new Usuario(0, "Diogo", "djapiassu", "1010");
