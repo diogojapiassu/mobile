@@ -51,8 +51,8 @@ public class MyActivity extends Activity {
         
         carregaLista();
         
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.cancel(R.string.app_name);
+        //NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        //notificationManager.cancel(R.string.app_name);
         
         //testCRUD();
     }
@@ -258,6 +258,7 @@ public class MyActivity extends Activity {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, MyActivity.class), 0);
         notification.setLatestEventInfo(this, "Prova", "Mobile dia 24/05/2014", pendingIntent);
         //int id = ;
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
         notificationManager.notify(new Random().nextInt(), notification);
     }
 }
