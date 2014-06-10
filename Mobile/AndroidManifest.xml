@@ -1,20 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="br.ufg.inf.fs.android.a01"
-          android:versionCode="1"
-          android:versionName="1.0">
+    package="br.ufg.inf.fs.android.a01"
+    android:versionCode="1"
+    android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="14" />
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="14" />
+
     <application
-        android:label="@string/app_name"
-        android:icon="@drawable/ic_launcher">
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name" >
         <activity
-            android:name="MyActivity"
-            android:label="@string/app_name">
+            android:name="br.ufg.inf.fs.android.a01.MyActivity"
+            android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="br.ufg.inf.fs.android.a01.ListaDeMensagensActivity"
+            android:label="@string/title_activity_lista_de_mensagens"
+            android:parentActivityName="br.ufg.inf.fs.android.a01.MyActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.ufg.inf.fs.android.a01.MyActivity" />
+        </activity>
+        <activity
+            android:name="br.ufg.inf.fs.android.a01.DetalheMensagemActivity"
+            android:label="@string/title_activity_detalhe_mensagem"
+            android:parentActivityName="br.ufg.inf.fs.android.a01.ListaDeMensagensActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.ufg.inf.fs.android.a01.ListaDeMensagensActivity" />
+        </activity>
     </application>
+
 </manifest>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">a01</string>
     <string name="mensagem">Olá, seja bem-vindo! Neste aplicativo iremos
     ilustrar como criar opções de menu, métodos para tratar as
@@ -7,4 +8,9 @@
     criados com as opções!</string>
     <string name="menu_configurar">Configurar</string>
     <string name="menu_sair">Sair</string>
+    <string name="title_activity_detalhe_mensagem">DetalheMensagemActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_lista_de_mensagens">ListaDeMensagensActivity</string>
+
 </resources>

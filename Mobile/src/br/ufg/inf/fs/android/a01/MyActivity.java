@@ -255,8 +255,14 @@ public class MyActivity extends Activity {
     public void notificaTeste(View view) {
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         Notification notification = new Notification(R.drawable.ic_launcher, "Nova notificação UFG!", System.currentTimeMillis());
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, MyActivity.class), 0);
-        notification.setLatestEventInfo(this, "Prova", "Mobile dia 24/05/2014", pendingIntent);
+        
+        String mensagem = "Mobile dia 24/05/2014";
+        
+        Intent intent = new Intent(this, DetalheMensagemActivity.class);
+        intent.putExtra("mensagem", mensagem);
+		
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        notification.setLatestEventInfo(this, "Prova", mensagem, pendingIntent);
         //int id = ;
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
         notificationManager.notify(new Random().nextInt(), notification);
