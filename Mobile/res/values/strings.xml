@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">a01</string>
+    <string name="app_name">NotificaUfg</string>
     <string name="mensagem">Olá, seja bem-vindo! Neste aplicativo iremos
     ilustrar como criar opções de menu, métodos para tratar as
     seleções correspondentes e, por último, como "ligar" os métodos

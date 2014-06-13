@@ -62,11 +62,10 @@ public class MyActivity extends Activity {
 		listView = (ListView) findViewById(R.id.listView1);
 
 		// Defined Array values to show in ListView
-		String[] values = new String[] { "Android List View",
-				"Adapter implementation", "Simple List View In Android",
-				"Create List View Android", "Android Example",
-				"List View Source Code", "List View Array Adapter",
-				"Android Example List View" };
+		String[] values = new String[] { 
+				"Prova Persistência",
+				"Aula de Concorrência", "Recesso no dia 20/06/2014",
+				"Trabalho em Grupo de Web"};
 
 		// Define a new Adapter
 		// First parameter - Context
