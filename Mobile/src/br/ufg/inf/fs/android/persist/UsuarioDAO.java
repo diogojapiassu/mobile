@@ -54,6 +54,30 @@ public class UsuarioDAO {
  
         return usuarios;
     }
+    
+    public Usuario getUsuario(String login, String senha){
+    	String queryReturnAll = "SELECT * FROM " + NOME_TABELA + " WHERE "
+    			+ COLUNA_LOGIN + " = '" + login + "' AND " + COLUNA_SENHA
+    			+ " = '" + senha + "'";
+    	//String queryReturnAll = "SELECT * FROM " + NOME_TABELA;
+    	
+    	abrirConexao();
+    	
+        Cursor cursor = dataBase.rawQuery(queryReturnAll, null);
+        List<Usuario> usuarios = construirUsuarioPorCursor(cursor);
+ 
+        if(usuarios != null && !usuarios.isEmpty()){
+        	return usuarios.get(0);
+        }
+        
+        return null;
+    }
+
+	private void abrirConexao() {
+		if(!dataBase.isOpen()){
+    		dataBase = dataBase.openDatabase(dataBase.getPath(), null, SQLiteDatabase.OPEN_READWRITE);
+    	}
+	}
  
     public void deletar(Usuario usuario) {
  

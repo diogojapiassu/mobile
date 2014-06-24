@@ -12,13 +12,25 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name="br.ufg.inf.fs.android.a01.MyActivity"
-            android:label="@string/app_name" >
+            android:name="br.ufg.inf.fs.android.a01.LoginActivity"
+            android:label="@string/title_activity_login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="br.ufg.inf.fs.android.a01.AutenticaActivity"
+            android:label="@string/title_activity_autentica"
+            android:parentActivityName="br.ufg.inf.fs.android.a01.LoginActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.ufg.inf.fs.android.a01.LoginActivity" />
+        </activity>
+        <activity
+            android:name="br.ufg.inf.fs.android.a01.MyActivity"
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name="br.ufg.inf.fs.android.a01.ListaDeMensagensActivity"

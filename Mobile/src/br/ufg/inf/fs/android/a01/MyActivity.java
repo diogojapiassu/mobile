@@ -128,7 +128,7 @@ public class MyActivity extends Activity {
          
         //assertTrue(usuarioDAO.recuperarTodos().isEmpty());
          
-        usuarioDAO.fecharConexao();
+        //usuarioDAO.fecharConexao();
          
     }
     

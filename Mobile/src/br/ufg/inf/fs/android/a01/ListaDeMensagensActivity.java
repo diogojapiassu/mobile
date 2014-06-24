@@ -1,19 +1,107 @@
 package br.ufg.inf.fs.android.a01;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v4.app.NavUtils;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class ListaDeMensagensActivity extends Activity {
 
+	ListView listView;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lista_de_mensagens);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		
+		carregaListaDeAcordoComUsuario();
+	}
+
+	private void carregaListaDeAcordoComUsuario() {
+		Boolean isUsuarioPublico = getIntent().getBooleanExtra("isUsuarioPublico", false);
+		int idUsuario = getIntent().getIntExtra("idUsuario", -1);
+		
+		if(!isUsuarioPublico && idUsuario > 0){
+			//Carrega lista de acordo com as configurações do usuario
+			carregaLista(true);
+		}else{
+			//Carrega lista publica
+			carregaLista(false);
+		}
+	}
+	
+	private void carregaLista(Boolean mensagemPrivada) {
+		// Get ListView object from xml
+		listView = (ListView) findViewById(R.id.listaDeMensagens);
+
+		// Defined Array values to show in ListView
+		String[] values;
+		if(mensagemPrivada){
+			values = new String[] { 
+					"Prova Persistência",
+					"Aula de Concorrência",
+					"Trabalho em Grupo de Web"};
+		}else{
+			values = new String[] { 
+					"Recesso no dia 23/06/2014",
+					"Novo Vestibular UFG",
+					"Aberta as inscrições para o inglês"};
+
+		}
+
+		// Define a new Adapter
+		// First parameter - Context
+		// Second parameter - Layout for the row
+		// Third parameter - ID of the TextView to which the data is written
+		// Forth - the Array of data
+
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, android.R.id.text1, values);
+
+		// Assign adapter to ListView
+		listView.setAdapter(adapter);
+		
+		// ListView Item Click Listener
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+
+				// ListView Clicked item index
+				int itemPosition = position;
+
+				// ListView Clicked item value
+				String itemValue = (String) listView
+						.getItemAtPosition(position);
+				
+				testando(itemValue);
+
+				// Show Alert
+				/*Toast.makeText(
+						getApplicationContext(),
+						"Position :" + itemPosition + "  ListItem : "
+								+ itemValue, Toast.LENGTH_LONG).show();*/
+				
+				
+
+			}
+		});
+	}
+	
+	public void testando(String itemValue){
+		Intent intent = new Intent(this, DetalheMensagemActivity.class);
+        intent.putExtra("mensagem", itemValue);
+        startActivity(intent);
 	}
 
 	/**
