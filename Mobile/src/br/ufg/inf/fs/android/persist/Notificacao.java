@@ -1,12 +1,15 @@
 package br.ufg.inf.fs.android.persist;
 
-import java.util.Date;
 
 public class Notificacao {
  
     private int id;
     private String descricao;
+    private String detalhes;
     //private Date data;
+    private String remetente;
+    private String data_string;
+    private Long data_long;
     private int is_lida;
     private int is_publica;
     private int grupo_notificacao;
@@ -18,6 +21,10 @@ public class Notificacao {
 	public Notificacao(
 			int id, 
 			String descricao, 
+			String detalhes, 
+			String remetente, 
+			String data_string,
+			Long data_long,
 			//Date data, 
 			int is_lida,
 			int is_publica, 
@@ -25,6 +32,10 @@ public class Notificacao {
 		super();
 		this.id = id;
 		this.descricao = descricao;
+		this.detalhes = detalhes;
+		this.remetente = remetente;
+		this.data_string = data_string;
+		this.data_long = data_long;
 		//this.data = data;
 		this.is_lida = is_lida;
 		this.is_publica = is_publica;
@@ -43,12 +54,12 @@ public class Notificacao {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	/*public Date getData() {
-		return data;
-	}
-	public void setData(Date data) {
-		this.data = data;
-	}*/
+	
+	/**
+	 * 1 - Lida
+	 * 0 - Não lida
+	 * @return
+	 */
 	public int getIs_lida() {
 		return is_lida;
 	}
@@ -66,5 +77,37 @@ public class Notificacao {
 	}
 	public void setGrupo_notificacao(int grupo_notificacao) {
 		this.grupo_notificacao = grupo_notificacao;
+	}
+
+	public String getRemetente() {
+		return remetente;
+	}
+
+	public void setRemetente(String remetente) {
+		this.remetente = remetente;
+	}
+
+	public String getData_string() {
+		return data_string;
+	}
+
+	public void setData_string(String data_string) {
+		this.data_string = data_string;
+	}
+
+	public Long getData_long() {
+		return data_long;
+	}
+
+	public void setData_long(Long data_long) {
+		this.data_long = data_long;
+	}
+
+	public String getDetalhes() {
+		return detalhes;
+	}
+
+	public void setDetalhes(String detalhes) {
+		this.detalhes = detalhes;
 	}
 }

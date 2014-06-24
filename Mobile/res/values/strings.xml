@@ -14,5 +14,6 @@
     <string name="title_activity_lista_de_mensagens">ListaDeMensagensActivity</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_autentica">AutenticaActivity</string>
+    <string name="title_activity_configuracoes">ConfiguracoesActivity</string>
 
 </resources>

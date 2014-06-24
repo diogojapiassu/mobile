@@ -34,8 +34,6 @@ public class AutenticaActivity extends Activity {
 		EditText nomeUsuario = (EditText)findViewById(R.id.editText1);
 		EditText senhaUsuario = (EditText)findViewById(R.id.editText2);
 		
-		
-		
 		if(nomeUsuario.getText() != null && senhaUsuario.getText() != null
 				//&& nomeUsuario.getText().toString().equalsIgnoreCase("diogo")
 				//&& senhaUsuario.getText().toString().equalsIgnoreCase("12345")

@@ -41,6 +41,12 @@ public class UsuarioDAO {
         dataBase = persistenceHelper.getWritableDatabase();
         persistenceHelper.onCreate(dataBase);
     }
+    
+    /*public void executarCargaInicial(Context context) {
+        getInstance(context);
+        PersistenceHelper persistenceHelper = PersistenceHelper.getInstance(context);
+        persistenceHelper.executarCargaInicial(dataBase, context);
+    }*/
  
     public void salvar(Usuario usuario) {
         ContentValues values = gerarContentValeuesUsuario(usuario);

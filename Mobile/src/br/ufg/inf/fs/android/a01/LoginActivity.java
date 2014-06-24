@@ -1,11 +1,8 @@
 package br.ufg.inf.fs.android.a01;
 
+import java.util.Date;
 import java.util.List;
 
-import br.ufg.inf.fs.android.persist.Notificacao;
-import br.ufg.inf.fs.android.persist.NotificacaoDAO;
-import br.ufg.inf.fs.android.persist.Usuario;
-import br.ufg.inf.fs.android.persist.UsuarioDAO;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -15,6 +12,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import br.ufg.inf.fs.android.persist.Configuracao;
+import br.ufg.inf.fs.android.persist.ConfiguracaoDAO;
+import br.ufg.inf.fs.android.persist.Notificacao;
+import br.ufg.inf.fs.android.persist.NotificacaoDAO;
+import br.ufg.inf.fs.android.persist.Usuario;
+import br.ufg.inf.fs.android.persist.UsuarioDAO;
+import br.ufg.inf.fs.android.util.UtilidadesData;
 
 public class LoginActivity extends Activity {
 
@@ -28,14 +32,80 @@ public class LoginActivity extends Activity {
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
 		
-		realizarCargaTabelaUsuarios();
-		realizarCargaTabelaNotificacoes();
+		executarCargaInicial();
+		//realizarCargaTabelaUsuarios();
+		//realizarCargaTabelaNotificacoes();
 	}
 	
+	private void executarCargaInicial() {
+		if(!isCargaJaExecutada()){
+			realizarCargaTabelaUsuarios();
+			realizarCargaTabelaNotificacoes();
+			realizarCargaTabelaConfiguracao();
+		}
+	}
+
+	private void realizarCargaTabelaConfiguracao() {
+		//Configurações Diogo:
+		Configuracao configuracao1 = new Configuracao(1, 1, 1, 0);
+		
+		//Configurações Fábio:
+		Configuracao configuracao2 = new Configuracao(2, 2, 1, 1);
+		
+		ConfiguracaoDAO configuracaoDAO =  ConfiguracaoDAO.getInstance(getBaseContext());
+         
+		configuracaoDAO.salvar(configuracao1);
+		configuracaoDAO.salvar(configuracao2);
+		
+		List<Configuracao> t = configuracaoDAO.recuperarTodos();
+	}
+
+	private boolean isCargaJaExecutada() {
+		UsuarioDAO usuarioDAO =  UsuarioDAO.getInstance(getBaseContext());
+		List<Usuario> listaDeUsuarios = usuarioDAO.recuperarTodos();
+		return listaDeUsuarios != null && !listaDeUsuarios.isEmpty();
+	}
+
+	/**
+	 * Insere notificações, todas como não lidas.
+	 */
 	private void realizarCargaTabelaNotificacoes() {
-		Notificacao notificacao1 = new Notificacao(1, "Recesso no dia 23/06/2014", 0, 1, 0);
-		Notificacao notificacao2 = new Notificacao(2, "Prova de Persistência", 0, 0, 0);
-		Notificacao notificacao3 = new Notificacao(3, "Trabalho de Mobile", 0, 0, 0);
+		Date dataCarga = new Date();
+		
+		Notificacao notificacao1 = new Notificacao(
+				1, 
+				"Recesso no dia 23/06/2014", 
+				"A Reitoria informa que no dia 23 e junho de 2014 a Universidade Federal de Goiás "
+				+ "estará de recesso nas cidades de Goiânia e Catalão",
+				"Reitoria UFG",
+				UtilidadesData.getDataString(dataCarga),
+				dataCarga.getTime(),
+				0, //Não lida
+				1, //Pública
+				0); //Sem grupo de notificação
+		Notificacao notificacao2 = new Notificacao(
+				2, 
+				"Prova de Persistência", 
+				"Informo que a prova de Persistência, marcada para o dia 25/06/2014 foi adiada "
+				+ "para a próxima semana, ou seja, para o dia 01/07/2014",
+				"Marcelo Quinta",
+				UtilidadesData.getDataString(dataCarga),
+				dataCarga.getTime(),
+				0, //Não lida
+				0, //Privada
+				1); //Grupo de persistencia
+		Notificacao notificacao3 = new Notificacao(
+				3, 
+				"Trabalho de Mobile", 
+				"Informo que a entrega do trabalho de Mobile está marcada para o dia 24/06/2014, "
+				+ "sem possibilidades de qualquer adiamento desta data, uma vez que a data "
+				+ "já foi postergada uma vez.",
+				"Fábio Nogueira",
+				UtilidadesData.getDataString(dataCarga),
+				dataCarga.getTime(),
+				0, //Não lida
+				0, //Privada
+				2); //Grupo de mobile
 		
 		NotificacaoDAO notificacaoDAO =  NotificacaoDAO.getInstance(getBaseContext());
 		

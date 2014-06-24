@@ -3,6 +3,8 @@ package br.ufg.inf.fs.android.a01;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufg.inf.fs.android.persist.Configuracao;
+import br.ufg.inf.fs.android.persist.ConfiguracaoDAO;
 import br.ufg.inf.fs.android.persist.Notificacao;
 import br.ufg.inf.fs.android.persist.NotificacaoDAO;
 import br.ufg.inf.fs.android.persist.UsuarioDAO;
@@ -16,11 +18,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class ListaDeMensagensActivity extends Activity {
 
 	ListView listView;
+	
+	private int idUsuario;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +33,34 @@ public class ListaDeMensagensActivity extends Activity {
 		setContentView(R.layout.activity_lista_de_mensagens);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		idUsuario = getIntent().getIntExtra("idUsuario", -1);
+		
+		Button botaoConfigurar = (Button) findViewById(R.id.buttonConfigurar);
+		
+		//Botão configurara somente para usuários privados:
+		if(idUsuario > 0){
+			botaoConfigurar.setVisibility(View.VISIBLE);
+		}else{
+			botaoConfigurar.setVisibility(View.INVISIBLE);
+		}
 		
 		carregaListaDeAcordoComUsuario();
+	}
+	
+	public void onClickConfigurar(View view) {
+		Intent intent = new Intent(this, ConfiguracoesActivity.class);
+		intent.putExtra("idUsuario", idUsuario);
+		startActivity(intent);
+	}
+	
+	@Override
+	protected void onResume() {
+		recuperarListaDeMensagens();
+		super.onResume();
 	}
 
 	private void carregaListaDeAcordoComUsuario() {
 		Boolean isUsuarioPublico = getIntent().getBooleanExtra("isUsuarioPublico", false);
-		int idUsuario = getIntent().getIntExtra("idUsuario", -1);
 		
 		if(!isUsuarioPublico && idUsuario > 0){
 			//Carrega lista de acordo com as configurações do usuario
@@ -47,19 +73,40 @@ public class ListaDeMensagensActivity extends Activity {
 	
 	private void carregaLista(Boolean mensagemPrivada) {
 		// Get ListView object from xml
+		recuperarListaDeMensagens();
+	}
+
+	private void recuperarListaDeMensagens() {
 		listView = (ListView) findViewById(R.id.listaDeMensagens);
 		
 		NotificacaoDAO notificacaoDAO =  NotificacaoDAO.getInstance(getBaseContext());
+		ConfiguracaoDAO configuracaoDAO =  ConfiguracaoDAO.getInstance(getBaseContext());
 		
-		List<Notificacao> listaDeNotificacoes = notificacaoDAO.recuperarTodos();
+		List<Notificacao> listaDeNotificacoes;
+		
+		//Se for mensagem privada:
+		if(idUsuario > 0){
+			Configuracao configuracao = configuracaoDAO.getConfiguracaoUsuario(idUsuario);
+			listaDeNotificacoes = notificacaoDAO.recuperarNotificacoesDoUsuario(configuracao);
+		}else{
+			listaDeNotificacoes = notificacaoDAO.recuperarNotificacoesPublicas();
+		}
 		
 		// Defined Array values to show in ListView
 		String values[] = new String[listaDeNotificacoes.size()];
 		
 		
 		for (int i = 0; i < listaDeNotificacoes.size(); i++) {
+			
+			String msgLida = "";
+			if(listaDeNotificacoes.get(i).getIs_lida() == 1){
+				msgLida = " - Lida";
+			}else{
+				msgLida = " - Não Lida";
+			}
+			
 			values[i] = listaDeNotificacoes.get(i).getId() + "-" + 
-						listaDeNotificacoes.get(i).getDescricao();
+						listaDeNotificacoes.get(i).getDescricao() + msgLida;
 		}
 
 		/*if(mensagemPrivada){

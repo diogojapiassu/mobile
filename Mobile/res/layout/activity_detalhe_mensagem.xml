@@ -12,20 +12,83 @@
         android:id="@+id/checkBox1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/mensagemNotificacao"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:onClick="onClickCheckBoxLida"
         android:text="Mensagem Lida" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/mensagemNotificacao"
+        android:text="Resumo:"
+        android:textSize="16dp" />
 
     <TextView
         android:id="@+id/mensagemNotificacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignLeft="@+id/checkBox1"
         android:layout_below="@+id/checkBox1"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="51dp"
+        android:layout_marginTop="46dp"
+        android:text="@string/hello_world"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView01"
+        android:layout_below="@+id/TextView01"
+        android:layout_marginTop="16dp"
+        android:text="Remetente:"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/TextView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextView01"
+        android:layout_alignLeft="@+id/TextView01"
+        android:text="Data:"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/TextViewData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/TextView03"
+        android:layout_alignBottom="@+id/TextView03"
+        android:layout_alignLeft="@+id/mensagemNotificacao"
+        android:text="@string/hello_world"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/TextView04"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TextView02"
+        android:layout_marginTop="19dp"
+        android:text="Mensagem:"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/TextViewMensagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView04"
+        android:layout_centerVertical="true"
+        android:text="@string/hello_world"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/TextViewRemetente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextView04"
+        android:layout_centerHorizontal="true"
         android:text="@string/hello_world"
         android:textSize="16dp" />
 
