@@ -1,5 +1,11 @@
 package br.ufg.inf.fs.android.a01;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.ufg.inf.fs.android.persist.Notificacao;
+import br.ufg.inf.fs.android.persist.NotificacaoDAO;
+import br.ufg.inf.fs.android.persist.UsuarioDAO;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,10 +48,21 @@ public class ListaDeMensagensActivity extends Activity {
 	private void carregaLista(Boolean mensagemPrivada) {
 		// Get ListView object from xml
 		listView = (ListView) findViewById(R.id.listaDeMensagens);
-
+		
+		NotificacaoDAO notificacaoDAO =  NotificacaoDAO.getInstance(getBaseContext());
+		
+		List<Notificacao> listaDeNotificacoes = notificacaoDAO.recuperarTodos();
+		
 		// Defined Array values to show in ListView
-		String[] values;
-		if(mensagemPrivada){
+		String values[] = new String[listaDeNotificacoes.size()];
+		
+		
+		for (int i = 0; i < listaDeNotificacoes.size(); i++) {
+			values[i] = listaDeNotificacoes.get(i).getId() + "-" + 
+						listaDeNotificacoes.get(i).getDescricao();
+		}
+
+		/*if(mensagemPrivada){
 			values = new String[] { 
 					"Prova Persistência",
 					"Aula de Concorrência",
@@ -56,7 +73,7 @@ public class ListaDeMensagensActivity extends Activity {
 					"Novo Vestibular UFG",
 					"Aberta as inscrições para o inglês"};
 
-		}
+		}*/
 
 		// Define a new Adapter
 		// First parameter - Context
@@ -100,7 +117,12 @@ public class ListaDeMensagensActivity extends Activity {
 	
 	public void testando(String itemValue){
 		Intent intent = new Intent(this, DetalheMensagemActivity.class);
-        intent.putExtra("mensagem", itemValue);
+        
+		String id = itemValue.split("-")[0];
+		String mensagem = itemValue.split("-")[1];
+		
+		intent.putExtra("id", id);
+        intent.putExtra("mensagem", mensagem);
         startActivity(intent);
 	}
 

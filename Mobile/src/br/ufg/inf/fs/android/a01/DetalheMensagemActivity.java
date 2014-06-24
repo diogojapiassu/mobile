@@ -1,5 +1,9 @@
 package br.ufg.inf.fs.android.a01;
 
+import java.util.List;
+
+import br.ufg.inf.fs.android.persist.Notificacao;
+import br.ufg.inf.fs.android.persist.NotificacaoDAO;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -15,9 +19,13 @@ public class DetalheMensagemActivity extends Activity {
 		setContentView(R.layout.activity_detalhe_mensagem);
 		// Show the Up button in the action bar.
 		String mensagemAberta = getIntent().getStringExtra("mensagem");
+		String id = getIntent().getStringExtra("id");
+		
+		NotificacaoDAO notificacaoDAO =  NotificacaoDAO.getInstance(getBaseContext());
+		Notificacao notificacao = notificacaoDAO.getNotificacaoPorId(id);
 		
 		TextView text = (TextView)findViewById(R.id.mensagemNotificacao);
-		text.setText(mensagemAberta);
+		text.setText(notificacao.getDescricao());
 		
 		setupActionBar();
 	}

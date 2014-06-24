@@ -28,6 +28,9 @@ public class PersistenceHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
     	db.execSQL(UsuarioDAO.SCRIPT_DELECAO_TABELA);
         db.execSQL(UsuarioDAO.SCRIPT_CRIACAO_TABELA_USUARIOS);
+        
+        db.execSQL(NotificacaoDAO.SCRIPT_DELECAO_TABELA_NOTIFICACAO);
+        db.execSQL(NotificacaoDAO.SCRIPT_CRIACAO_TABELA_NOTIFICACAO);
     }
  
     @Override

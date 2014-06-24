@@ -2,6 +2,8 @@ package br.ufg.inf.fs.android.a01;
 
 import java.util.List;
 
+import br.ufg.inf.fs.android.persist.Notificacao;
+import br.ufg.inf.fs.android.persist.NotificacaoDAO;
 import br.ufg.inf.fs.android.persist.Usuario;
 import br.ufg.inf.fs.android.persist.UsuarioDAO;
 import android.app.Activity;
@@ -27,8 +29,23 @@ public class LoginActivity extends Activity {
 		}
 		
 		realizarCargaTabelaUsuarios();
+		realizarCargaTabelaNotificacoes();
 	}
 	
+	private void realizarCargaTabelaNotificacoes() {
+		Notificacao notificacao1 = new Notificacao(1, "Recesso no dia 23/06/2014", 0, 1, 0);
+		Notificacao notificacao2 = new Notificacao(2, "Prova de Persistência", 0, 0, 0);
+		Notificacao notificacao3 = new Notificacao(3, "Trabalho de Mobile", 0, 0, 0);
+		
+		NotificacaoDAO notificacaoDAO =  NotificacaoDAO.getInstance(getBaseContext());
+		
+		notificacaoDAO.salvar(notificacao1);
+		notificacaoDAO.salvar(notificacao2);
+		notificacaoDAO.salvar(notificacao3);
+		
+		notificacaoDAO.fecharConexao();
+	}
+
 	public void realizarCargaTabelaUsuarios() {
         
         //Salva usuário padrão para acesso ao sistema:
@@ -56,7 +73,7 @@ public class LoginActivity extends Activity {
          
         //assertTrue(usuarioDAO.recuperarTodos().isEmpty());
          
-        usuarioDAO.fecharConexao();
+        //usuarioDAO.fecharConexao();
          
     }
 	
