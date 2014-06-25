@@ -54,7 +54,8 @@ public class UsuarioDAO {
     }
  
     public List<Usuario> recuperarTodos() {
-        String queryReturnAll = "SELECT * FROM " + NOME_TABELA;
+        abrirConexao();
+    	String queryReturnAll = "SELECT * FROM " + NOME_TABELA;
         Cursor cursor = dataBase.rawQuery(queryReturnAll, null);
         List<Usuario> usuarios = construirUsuarioPorCursor(cursor);
  

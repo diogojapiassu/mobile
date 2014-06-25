@@ -36,7 +36,6 @@ public final class R {
         public static final int TextViewData=0x7f07000b;
         public static final int TextViewMensagem=0x7f07000d;
         public static final int TextViewRemetente=0x7f07000e;
-        public static final int action_settings=0x7f07001c;
         public static final int button1=0x7f070016;
         public static final int button2=0x7f070017;
         public static final int buttonConfigurar=0x7f070010;
@@ -51,7 +50,7 @@ public final class R {
         public static final int listaDeMensagens=0x7f07000f;
         public static final int mensagemNotificacao=0x7f070008;
         public static final int menu_configurar=0x7f07001d;
-        public static final int menu_sair=0x7f07001e;
+        public static final int menu_sair=0x7f07001c;
         public static final int radioGroup1=0x7f070011;
         public static final int rbDataCrescente=0x7f070012;
         public static final int rbDataDescrescente=0x7f070013;

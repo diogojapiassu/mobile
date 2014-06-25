@@ -183,32 +183,13 @@ public class MyActivity extends Activity {
         toast.show();
     }
 
-    /**
-     * Chamado quando se seleciona o item Sair.
-     * Neste caso, termina a aplicação.
-     * @param item
-     */
     public void onClickMenuSair(MenuItem item) {
         finish();
     }
 
-    /**
-     * Chamado quando uma opção de menu é selecionada.
-     * Observe, do código abaixo, as ações executadas:
-     * (i) obter o identificador da opção selecionada;
-     * (ii) conforme o identificador, chamar método que irá
-     * tratar a seleção do usuário.
-     * @param item
-     * @return <c>true</c> se o item foi tratado, ou <c>false</c>
-     * caso contrário.
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_configurar:
-                onClickMenuConfigurar(item);
-                return true;
-
             case R.id.menu_sair:
                 onClickMenuSair(item);
                 return true;
