@@ -20,7 +20,7 @@ public class ConfiguracoesActivity extends Activity {
 
 	private Configuracao configuracao;
 	//private Switch switchPersistencia;
-	//private Switch switchMobile;
+	private Switch switchNaoLidas;
 	private CheckBox ckPersistencia;
 	private CheckBox ckMobile;
 	private int idUsuario;
@@ -42,6 +42,7 @@ public class ConfiguracoesActivity extends Activity {
 		
 		boolean isExibirPersistencia = configuracao.getExibir_persistencia() > 0;
 		boolean isExibirMobile = configuracao.getExibir_mobile() > 0;
+		boolean isSomenteNaoLidas = configuracao.getSomente_nao_lidas() > 0;
 		
 		ckPersistencia = (CheckBox)findViewById(R.id.checkBoxPersistencia);
 		ckPersistencia.setChecked(isExibirPersistencia);
@@ -49,10 +50,10 @@ public class ConfiguracoesActivity extends Activity {
 		ckMobile = (CheckBox)findViewById(R.id.checkBoxMobile);
 		ckMobile.setChecked(isExibirMobile);
 		
-		/*switchPersistencia = (Switch)findViewById(R.id.switchPersistencia);
-		switchPersistencia.setChecked(isExibirPersistencia);
+		switchNaoLidas = (Switch)findViewById(R.id.switchNaoLidas);
+		switchNaoLidas.setChecked(isSomenteNaoLidas);
 		
-		switchMobile = (Switch)findViewById(R.id.switchMobile);
+		/*switchMobile = (Switch)findViewById(R.id.switchMobile);
 		switchMobile.setChecked(isExibirMobile);*/
 	}
 	
@@ -68,6 +69,7 @@ public class ConfiguracoesActivity extends Activity {
 		
 		configuracao.setExibir_persistencia(ckPersistencia.isChecked() ? 1 : 0);
 		configuracao.setExibir_mobile(ckMobile.isChecked() ? 1 : 0);
+		configuracao.setSomente_nao_lidas(switchNaoLidas.isChecked() ? 1 : 0);
 		configuracaoDAO.editar(configuracao);
 		
 		Intent intent = new Intent(this, ListaDeMensagensActivity.class);

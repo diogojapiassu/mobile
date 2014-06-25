@@ -6,16 +6,19 @@ public class Configuracao {
     private int id_usuario;
     private int exibir_persistencia;
     private int exibir_mobile;
+    private int somente_nao_lidas;
     
     public Configuracao(
     		int id, 
     		int id_usuario, 
     		int exibir_persistencia,
-			int exibir_mobile) {
+			int exibir_mobile,
+			int somente_nao_lidas) {
 		this.id = id;
 		this.id_usuario = id_usuario;
 		this.exibir_persistencia = exibir_persistencia;
 		this.exibir_mobile = exibir_mobile;
+		this.somente_nao_lidas = somente_nao_lidas;
 	}
 
 	public Configuracao() {
@@ -45,5 +48,13 @@ public class Configuracao {
 	}
 	public void setExibir_mobile(int exibir_mobile) {
 		this.exibir_mobile = exibir_mobile;
+	}
+
+	public int getSomente_nao_lidas() {
+		return somente_nao_lidas;
+	}
+
+	public void setSomente_nao_lidas(int somente_nao_lidas) {
+		this.somente_nao_lidas = somente_nao_lidas;
 	}
 }

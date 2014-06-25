@@ -29,7 +29,7 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int TextView01=0x7f070007;
+        public static final int TextView01=0x7f070002;
         public static final int TextView02=0x7f070009;
         public static final int TextView03=0x7f07000a;
         public static final int TextView04=0x7f07000c;
@@ -40,11 +40,10 @@ public final class R {
         public static final int button1=0x7f070016;
         public static final int button2=0x7f070017;
         public static final int buttonConfigurar=0x7f070010;
-        public static final int buttonSalvarConfiguracoes=0x7f070003;
-        public static final int checkBox1=0x7f070006;
-        public static final int checkBox2=0x7f070005;
-        public static final int checkBoxMobile=0x7f070002;
-        public static final int checkBoxPersistencia=0x7f070004;
+        public static final int buttonSalvarConfiguracoes=0x7f070006;
+        public static final int checkBox1=0x7f070007;
+        public static final int checkBoxMobile=0x7f070004;
+        public static final int checkBoxPersistencia=0x7f070003;
         public static final int container=0x7f070000;
         public static final int editText1=0x7f070014;
         public static final int editText2=0x7f070015;
@@ -59,6 +58,7 @@ public final class R {
         public static final int switch1=0x7f070018;
         public static final int switch2=0x7f070019;
         public static final int switch3=0x7f07001a;
+        public static final int switchNaoLidas=0x7f070005;
         public static final int textView1=0x7f070001;
     }
     public static final class layout {

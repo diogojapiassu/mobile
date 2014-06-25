@@ -47,10 +47,10 @@ public class LoginActivity extends Activity {
 
 	private void realizarCargaTabelaConfiguracao() {
 		//Configurações Diogo:
-		Configuracao configuracao1 = new Configuracao(1, 1, 1, 0);
+		Configuracao configuracao1 = new Configuracao(1, 1, 1, 0, 0);
 		
 		//Configurações Fábio:
-		Configuracao configuracao2 = new Configuracao(2, 2, 1, 1);
+		Configuracao configuracao2 = new Configuracao(2, 2, 1, 1, 0);
 		
 		ConfiguracaoDAO configuracaoDAO =  ConfiguracaoDAO.getInstance(getBaseContext());
          

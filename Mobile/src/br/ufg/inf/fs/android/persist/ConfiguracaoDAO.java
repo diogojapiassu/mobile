@@ -15,12 +15,14 @@ public class ConfiguracaoDAO {
     public static final String COLUNA_ID_USUARIO = "id_usuario";
     public static final String COLUNA_EXIBIR_PERSISTENCIA = "exibir_persistencia";
     public static final String COLUNA_EXIBIR_MOBILE = "exibir_mobile";
+    public static final String COLUNA_SOMENTE_NAO_LIDAS = "somente_nao_lidas";
  
     public static final String SCRIPT_CRIACAO_TABELA_CONFIGURACAO = 
     		"CREATE TABLE " + NOME_TABELA + "(" +
 	            COLUNA_ID + " INTEGER PRIMARY KEY," + 
 	    		COLUNA_ID_USUARIO + " INTEGER," + 
 	            COLUNA_EXIBIR_MOBILE + " INTEGER," +
+	            COLUNA_SOMENTE_NAO_LIDAS + " INTEGER," +
 	            COLUNA_EXIBIR_PERSISTENCIA + " INTEGER" + ")";
  
     public static final String SCRIPT_DELECAO_TABELA_CONFIGURACAO =  
@@ -118,13 +120,15 @@ public class ConfiguracaoDAO {
                     int indexIdUsuario = cursor.getColumnIndex(COLUNA_ID_USUARIO);
                     int indexExibirPersistencia = cursor.getColumnIndex(COLUNA_EXIBIR_PERSISTENCIA);
                     int indexExibirMobile = cursor.getColumnIndex(COLUNA_EXIBIR_MOBILE);
+                    int indexSomenteNaoLidas = cursor.getColumnIndex(COLUNA_SOMENTE_NAO_LIDAS);
  
                     int id = cursor.getInt(indexID);
                     int idUsuario = cursor.getInt(indexIdUsuario);
                     int exibirPersistencia = cursor.getInt(indexExibirPersistencia);
                     int exibirMobile = cursor.getInt(indexExibirMobile);
+                    int somenteNaoLidas = cursor.getInt(indexSomenteNaoLidas);
  
-                    Configuracao configuracao = new Configuracao(id, idUsuario, exibirPersistencia, exibirMobile);
+                    Configuracao configuracao = new Configuracao(id, idUsuario, exibirPersistencia, exibirMobile, somenteNaoLidas);
  
                     configuracoes.add(configuracao);
  
@@ -142,6 +146,7 @@ public class ConfiguracaoDAO {
         values.put(COLUNA_ID_USUARIO, configuracao.getId_usuario());
         values.put(COLUNA_EXIBIR_PERSISTENCIA, configuracao.getExibir_persistencia());
         values.put(COLUNA_EXIBIR_MOBILE, configuracao.getExibir_mobile());
+        values.put(COLUNA_SOMENTE_NAO_LIDAS, configuracao.getSomente_nao_lidas());
  
         return values;
     }

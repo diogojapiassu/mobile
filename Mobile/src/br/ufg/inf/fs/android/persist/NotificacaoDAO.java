@@ -110,14 +110,20 @@ public class NotificacaoDAO {
         if((configuracao.getExibir_persistencia() + configuracao.getExibir_mobile()) > 0){
         	
         	if(configuracao.getExibir_persistencia() > 0){
-        		query += COLUNA_GRUPO_NOTIFICACAO + " =  1";
+        		query += "( " + COLUNA_GRUPO_NOTIFICACAO + " =  1";
         		
         		if(configuracao.getExibir_mobile() > 0){
         			query += " OR " + COLUNA_GRUPO_NOTIFICACAO + " =  2";
         		}
         		
+        		query += " ) ";
+        		
         	}else if(configuracao.getExibir_mobile() > 0){
         		query += COLUNA_GRUPO_NOTIFICACAO + " =  2";
+        	}
+        	
+        	if(configuracao.getSomente_nao_lidas() > 0){
+        		query += " AND " + COLUNA_IS_LIDA + " =  0";
         	}
         	
         	if(ordemDataLista == 1){
