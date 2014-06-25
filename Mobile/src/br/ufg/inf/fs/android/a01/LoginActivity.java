@@ -70,16 +70,22 @@ public class LoginActivity extends Activity {
 	 * Insere notificações, todas como não lidas.
 	 */
 	private void realizarCargaTabelaNotificacoes() {
-		Date dataCarga = new Date();
+		Date dataCarga1 = new Date();
+		dataCarga1.setDate(24);
+		Date dataCarga2 = new Date(); 
+		dataCarga2.setDate(25);
+		Date dataCarga3 = new Date(); 
+		dataCarga3.setDate(26);
 		
 		Notificacao notificacao1 = new Notificacao(
 				1, 
 				"Recesso no dia 23/06/2014", 
 				"A Reitoria informa que no dia 23 e junho de 2014 a Universidade Federal de Goiás "
-				+ "estará de recesso nas cidades de Goiânia e Catalão",
+				+ "estará de recesso nas cidades de Goiânia e Catalão. Maiores informações: "
+				+ "http://www.ufg.br ",
 				"Reitoria UFG",
-				UtilidadesData.getDataString(dataCarga),
-				dataCarga.getTime(),
+				UtilidadesData.getDataString(dataCarga1),
+				dataCarga1.getTime(),
 				0, //Não lida
 				1, //Pública
 				0); //Sem grupo de notificação
@@ -87,10 +93,11 @@ public class LoginActivity extends Activity {
 				2, 
 				"Prova de Persistência", 
 				"Informo que a prova de Persistência, marcada para o dia 25/06/2014 foi adiada "
-				+ "para a próxima semana, ou seja, para o dia 01/07/2014",
+				+ "para a próxima semana, ou seja, para o dia 01/07/2014. Maiores informações: "
+				+ "http://www.ufg.br",
 				"Marcelo Quinta",
-				UtilidadesData.getDataString(dataCarga),
-				dataCarga.getTime(),
+				UtilidadesData.getDataString(dataCarga2),
+				dataCarga2.getTime(),
 				0, //Não lida
 				0, //Privada
 				1); //Grupo de persistencia
@@ -99,10 +106,11 @@ public class LoginActivity extends Activity {
 				"Trabalho de Mobile", 
 				"Informo que a entrega do trabalho de Mobile está marcada para o dia 24/06/2014, "
 				+ "sem possibilidades de qualquer adiamento desta data, uma vez que a data "
-				+ "já foi postergada uma vez.",
+				+ "já foi postergada uma vez. Maiores informações: "
+				+ "http://www.ufg.br",
 				"Fábio Nogueira",
-				UtilidadesData.getDataString(dataCarga),
-				dataCarga.getTime(),
+				UtilidadesData.getDataString(dataCarga3),
+				dataCarga3.getTime(),
 				0, //Não lida
 				0, //Privada
 				2); //Grupo de mobile

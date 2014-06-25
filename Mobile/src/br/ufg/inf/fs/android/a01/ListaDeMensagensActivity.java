@@ -24,7 +24,7 @@ import android.widget.ListView;
 public class ListaDeMensagensActivity extends Activity {
 
 	ListView listView;
-	
+	private int ordemDataLista = 0; //0 - sem ordem, 1 - crescente, 2 - decrescente
 	private int idUsuario;
 	
 	@Override
@@ -46,6 +46,17 @@ public class ListaDeMensagensActivity extends Activity {
 		
 		carregaListaDeAcordoComUsuario();
 	}
+	
+	public void onClickDataCrescente(View view) {
+		ordemDataLista = 1;
+		recuperarListaDeMensagens();
+	}
+	
+	public void onClickDataDecrescente(View view) {
+		ordemDataLista = 2;
+		recuperarListaDeMensagens();
+	}
+	
 	
 	public void onClickConfigurar(View view) {
 		Intent intent = new Intent(this, ConfiguracoesActivity.class);
@@ -87,9 +98,9 @@ public class ListaDeMensagensActivity extends Activity {
 		//Se for mensagem privada:
 		if(idUsuario > 0){
 			Configuracao configuracao = configuracaoDAO.getConfiguracaoUsuario(idUsuario);
-			listaDeNotificacoes = notificacaoDAO.recuperarNotificacoesDoUsuario(configuracao);
+			listaDeNotificacoes = notificacaoDAO.recuperarNotificacoesDoUsuario(configuracao, ordemDataLista);
 		}else{
-			listaDeNotificacoes = notificacaoDAO.recuperarNotificacoesPublicas();
+			listaDeNotificacoes = notificacaoDAO.recuperarNotificacoesPublicas(ordemDataLista);
 		}
 		
 		// Defined Array values to show in ListView
@@ -105,8 +116,10 @@ public class ListaDeMensagensActivity extends Activity {
 				msgLida = " - Não Lida";
 			}
 			
+			String dataNotificacao = " - " + listaDeNotificacoes.get(i).getData_string();
+			
 			values[i] = listaDeNotificacoes.get(i).getId() + "-" + 
-						listaDeNotificacoes.get(i).getDescricao() + msgLida;
+						listaDeNotificacoes.get(i).getDescricao() + msgLida + dataNotificacao;
 		}
 
 		/*if(mensagemPrivada){

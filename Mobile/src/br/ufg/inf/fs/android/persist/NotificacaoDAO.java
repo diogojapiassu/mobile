@@ -85,17 +85,24 @@ public class NotificacaoDAO {
         return notificacoes;
     }
     
-    public List<Notificacao> recuperarNotificacoesPublicas() {
+    public List<Notificacao> recuperarNotificacoesPublicas(int ordemDataLista) {
     	abrirConexao();
         String queryReturnAll = "SELECT * FROM " + NOME_TABELA + " WHERE " +
         		COLUNA_GRUPO_NOTIFICACAO + " = 0";
+        
+        if(ordemDataLista == 1){
+        	queryReturnAll += " ORDER BY " + COLUNA_DATA_LONG + " ASC ";
+    	}else if(ordemDataLista == 2){
+    		queryReturnAll += " ORDER BY " + COLUNA_DATA_LONG + " DESC ";
+    	}
+        
         Cursor cursor = dataBase.rawQuery(queryReturnAll, null);
         List<Notificacao> notificacoes = construirNotificacaoPorCursor(cursor);
  
         return notificacoes;
     }
     
-    public List<Notificacao> recuperarNotificacoesDoUsuario(Configuracao configuracao) {
+    public List<Notificacao> recuperarNotificacoesDoUsuario(Configuracao configuracao, int ordemDataLista) {
     	abrirConexao();
         String query = "SELECT * FROM " + NOME_TABELA + " WHERE ";
         
@@ -111,6 +118,12 @@ public class NotificacaoDAO {
         		
         	}else if(configuracao.getExibir_mobile() > 0){
         		query += COLUNA_GRUPO_NOTIFICACAO + " =  2";
+        	}
+        	
+        	if(ordemDataLista == 1){
+        		query += " ORDER BY " + COLUNA_DATA_LONG + " ASC ";
+        	}else if(ordemDataLista == 2){
+        		query += " ORDER BY " + COLUNA_DATA_LONG + " DESC ";
         	}
         			
         }else{

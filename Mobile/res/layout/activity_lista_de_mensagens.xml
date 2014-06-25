@@ -15,6 +15,7 @@
         android:layout_alignLeft="@+id/textView1" >
     </ListView>
 
+
     <Button
         android:id="@+id/buttonConfigurar"
         android:layout_width="wrap_content"
@@ -23,5 +24,34 @@
         android:layout_centerHorizontal="true"
         android:onClick="onClickConfigurar"
         android:text="Configurar" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonConfigurar"
+        android:layout_alignLeft="@+id/listaDeMensagens"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/rbDataCrescente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/buttonConfigurar"
+            android:layout_alignLeft="@+id/listaDeMensagens"
+            android:layout_marginBottom="22dp"
+            android:onClick="onClickDataCrescente"
+            android:text="Data Crescente" />
+
+        <RadioButton
+            android:id="@+id/rbDataDescrescente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/rbDataCrescente"
+            android:layout_alignBottom="@+id/rbDataCrescente"
+            android:layout_alignRight="@+id/listaDeMensagens"
+            android:onClick="onClickDataDecrescente"
+            android:text="Data Descresc" />
+    </RadioGroup>
 
 </RelativeLayout>
